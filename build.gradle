@@ -1,59 +1,45 @@
-group = 'com.github.hanoseok.topcoder'
-version = "1.0.0-SNAPSHOT"
+group 'com.github.hanoseok.topcoder'
+version '1.0.0-SNAPSHOT'
 
-apply plugin: "java"
-apply plugin: "idea"
+apply plugin: 'java'
+apply plugin: 'idea'
 apply plugin: 'distribution'
 
-project(':topcoder') {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-    sourceSets {
-        main {
-            java {
-                srcDir 'src/main/java'
-            }
-            resources {
-                srcDir 'src/main/resources'
-            }
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
         }
-        test {
-            java {
-                srcDir 'src/test/java'
-            }
-            resources {
-                srcDir 'src/test/resources'
-            }
+        resources {
+            srcDir 'src/main/resources'
         }
     }
-
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        testCompile("junit:junit:4.12")
-    }
-
-    jar {
-        baseName = project.name
-        version = project.version
-    }
-
-    distributions {
-        main {
-            baseName = project.name
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
         }
     }
+}
 
-    task wrapper(type: Wrapper) {
-        gradleVersion = "2.9"
-    }
+repositories {
+    mavenCentral()
+}
 
-    idea {
-        module {
-            inheritOutputDirs = false
-            outputDir = file("${buildDir}/classes/main/")
-        }
-    }
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+jar {
+    baseName = project.name
+    version = project.version
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "2.9"
 }
